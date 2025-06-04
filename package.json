@@ -1,0 +1,21 @@
+{
+  "name": "community-case-manager",
+  "version": "1.0.0",
+  "description": "Track individuals in a community justice or social support program with case files, progress tracking, and notes — similar to PROMISE.",
+  "main": "index.js",
+  "dependencies": {
+    "mongodb": "6.17.0"
+  },
+  "devDependencies": {
+    "concurrently": "9.1.2"
+  },
+  "scripts": {
+    "start": "cd server && npm start",
+    "develop": "concurrently \"cd server && npm run start\" \"cd client && npm run dev\"",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "build": "cd client && npm run build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
