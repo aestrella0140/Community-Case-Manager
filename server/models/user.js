@@ -1,4 +1,4 @@
-const { Schema, model, default: mongoose } = require("mongoose");
+const { Schema, model} = require("mongoose");
 const bcrypt = require("bcrypt");
 
 const UserSchema = new Schema({
@@ -15,12 +15,25 @@ const UserSchema = new Schema({
   email: {
     type: String,
     required: true,
+    unique: true,
+    lowercase: true,
   },
   password: {
     type: String,
     required: true,
     trim: true,
   },
+  role: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  cases: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Case'
+    },
+  ]
 });
 
 UserSchema.pre("save", async function (next) {
