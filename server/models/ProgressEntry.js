@@ -27,7 +27,7 @@ const progressEntrySchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "User",
     },
-})
+}, { timestamps: true });
 
 const ProgressEntry = model("ProgressEntry", progressEntrySchema);
 
