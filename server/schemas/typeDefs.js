@@ -47,6 +47,9 @@ getAllCases: [Case!]!
 getCaseById(id: ID!): Case
 getAllUsers: [User!]!
 getUserById(id: ID!): User
+getAllProgressEntryById(id: ID!): ProgressEntry
+getAllProgressEntries: [ProgressEntry!]!
+getProgressEntriesByCase(caseId: ID!): [ProgressEntry!]!
 }
 
 type Mutation {
@@ -73,6 +76,25 @@ authorId: ID!,
 caseId: ID!
 ): Note!
 }
+
+addProgressEntry (
+title: String!,
+desctription: String!,
+date: String!,
+status: String!,
+case: ID!,
+createdBy: ID!
+): ProgressEntry
+
+updateProgressEntry (
+id: ID!,
+title: String,
+desctription: String,
+status: String,
+date: String,
+): ProgressEntry!
+
+deleteProgressEntry(id: ID!): Boolean
 
 type Auth {
 token: ID!
