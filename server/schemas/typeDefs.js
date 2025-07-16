@@ -94,7 +94,11 @@ status: String,
 date: String,
 ): ProgressEntry!
 
-deleteProgressEntry(id: ID!): Boolean
+deleteUser(id: ID!): Boolean!
+deleteCase(id: ID!): Boolean!
+deleteUserCase(useId: ID!, caseId: ID!): Boolean!
+deleteNote(id: ID!): Boolean!
+deleteProgressEntry(id: ID!): Boolean!
 
 type Auth {
 token: ID!

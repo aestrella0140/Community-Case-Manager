@@ -99,6 +99,43 @@ const resolvers = {
         case: caseId,
         createdBy,
       });
+      return entry
     },
+
+    removeUser: async (parent, { userId }) => {
+      return User.findOneAndDelete({ _id: userId});
+    },
+
+    deleteCase: async (parent, { id }) => {
+      const deleteCase = await Case.findByIdAndDelete(id);
+
+      if (!deleteCase) return false;
+
+      await User.updateMany(
+        { cases: id },
+        {$pull: { cases: id }}
+      );
+
+      return true;
+    },
+
+    deleteUserCase: async (parent, { userId, caseId }) => {
+      const user = await User.findOne({ _id: userId, cases: caseId });
+
+      if (!user) {
+        throw new Error('User does not have this case.');
+      }
+
+      const deletedCase = await Case.findByIdAndDelete(caseId);
+      if (!deletedCase) return false;
+
+      await User.findByIdAndUpdate(
+        userId,
+        { $pull: { cases: caseId }},
+        { new: true }
+      );
+      return true;
+    },
+
   },
 };
