@@ -96,9 +96,11 @@ date: String,
 
 deleteUser(id: ID!): Boolean!
 deleteCase(id: ID!): Boolean!
-deleteUserCase(useId: ID!, caseId: ID!): Boolean!
+deleteUserCase(userId: ID!, caseId: ID!): Boolean!
 deleteNote(id: ID!): Boolean!
+deleteUserNote(user: ID!, noteId: ID!): Boolean!
 deleteProgressEntry(id: ID!): Boolean!
+deleteUserProgressEntry(user: ID!, progressEntry: ID!): Boolean!
 
 type Auth {
 token: ID!

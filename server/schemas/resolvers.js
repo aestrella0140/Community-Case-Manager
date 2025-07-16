@@ -107,15 +107,45 @@ const resolvers = {
     },
 
     deleteCase: async (parent, { id }) => {
-      const deleteCase = await Case.findByIdAndDelete(id);
+      const deletedCase = await Case.findByIdAndDelete(id);
 
-      if (!deleteCase) return false;
+      if (!deletedCase) return false;
 
       await User.updateMany(
         { cases: id },
         {$pull: { cases: id }}
       );
 
+      return true;
+    },
+
+    deleteNote: async (parent, { id }) => {
+      const deletedNote = await Note.findByIdAndDelete(id);
+
+      if (!deletedNote) return false;
+
+      await User.updateMany(
+        { notes: id },
+        { $pull: { notes: id } }
+      );
+
+      await Case.updateMany(
+        { notes: id },
+        { $pull: { notes: id } } 
+      );
+
+      return true;
+    },
+
+    deleteProgressEntry: async (parent, { id }) => {
+      const deletedProgressEntry = await ProgressEntry.findByIdAndDelete(id);
+
+      if (!deletedProgressEntry) return false;
+
+      await User.updateMany(
+        { progressEntries: id },
+        { $pull: { progressEntries: id }}
+      );
       return true;
     },
 
@@ -137,5 +167,40 @@ const resolvers = {
       return true;
     },
 
+    deleteUserNote: async (parent, { userId, noteId }) => {
+      const user = await User.findOne({ _id: userId, notes: noteId });
+
+      if (!user) {
+        throw new Error('User does not have this Note.');
+      }
+
+      const deletedNote = await Note.findByIdAndDelete(noteId);
+      if (!deletedNote) return false;
+
+      await User.findByIdAndUpdate(
+        userId,
+        {$pull: { notes: noteId }},
+        { new: true }
+      );
+      return true;
+    },
+
+    deleteUserProgressEntry: async (parent, { userId, progressEntryId }) => {
+      const user = await User.findOne({ _id: userId, progressEntries: progressEntryId });
+
+      if (!user) {
+        throw new Error('User does not have this Progress entry.');
+      }
+
+      const deleteProgressEntry = await ProgressEntry.findByIdAndDelete(progressEntryId);
+      if(!deleteProgressEntry) return false;
+
+      await User.findByIdAndUpdate(
+        userId,
+        {$pull: { progressEntries: progressEntryId }},
+        { new: true }
+      );
+      return true;
+    },
   },
 };
