@@ -86,13 +86,41 @@ case: ID!,
 createdBy: ID!
 ): ProgressEntry
 
-updateProgressEntry (
-id: ID!,
-title: String,
-desctription: String,
-status: String,
-date: String,
-): ProgressEntry!
+input UpdateUserInput {
+firstName: String
+lastName: String
+email: String
+password: String
+role: String
+}
+
+input UpdateCaseInput {
+firstName: String
+lastName: String
+dob: String
+status: String
+assignedTo: ID
+}
+
+input UpdateNoteInput {
+content: String
+authorId: ID
+caseId: ID
+}
+
+input UpdateProgressEntryInput {
+title: String
+description: String
+date: String
+status: String
+caseId: ID
+createdBy: ID
+}
+
+updateUser:(userId: ID!, updateUserInput!): User
+updateCase(caseId: ID!, input: UpdateCaseInput!): Case
+updateNote(noteId: ID!, input: UpdateNoteInput!): Note
+updateProgressEntry(entryId: ID!, input updateProgressEntry!): ProgressEntry
 
 deleteUser(id: ID!): Boolean!
 deleteCase(id: ID!): Boolean!

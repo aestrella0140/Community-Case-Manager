@@ -102,6 +102,8 @@ const resolvers = {
       return entry
     },
 
+    
+
     removeUser: async (parent, { userId }) => {
       return User.findOneAndDelete({ _id: userId});
     },
