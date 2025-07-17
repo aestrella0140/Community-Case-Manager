@@ -89,7 +89,7 @@ addUser (
     lastName: String!,
     email: String!,
     password: String!,
-    role: String!,
+    role: String!
 ): User!
 
 login(email: String!, password: String!): Auth
@@ -116,10 +116,10 @@ case: ID!,
 createdBy: ID!
 ): ProgressEntry
 
-updateUser:(userId: ID!, input: UpdateUserInput!): User
+updateUser(userId: ID!, input: UpdateUserInput!): User
 updateCase(caseId: ID!, input: UpdateCaseInput!): Case
 updateNote(noteId: ID!, input: UpdateNoteInput!): Note
-updateProgressEntry(entryId: ID!, input: UpdateProgressEntry!): ProgressEntry
+updateProgressEntry(entryId: ID!, input: UpdateProgressEntryInput!): ProgressEntry
 
 deleteUser(id: ID!): Boolean!
 deleteCase(id: ID!): Boolean!
