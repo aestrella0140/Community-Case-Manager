@@ -102,7 +102,21 @@ const resolvers = {
       return entry
     },
 
-    
+    updateUser: async (parent, { userId, input }) => {
+      return await User.findByIdAndUpdate(userId, input, { new: true, runValidators: true });
+    },
+
+    updateCase: async (parent, { caseId, input }) => {
+      return await Case.findByIdAndUpdate(caseId, input, { new: true, runValidators: true });
+    },
+
+    updateNote: async (parent, { noteId, input }) => {
+      return await Note.findByIdAndUpdate(noteId, input, { new: true, runValidators: true });
+    },
+
+    updateProgressEntry: async (parent, { progressEntryId, input }) => {
+      return await ProgressEntry.findByIdAndUpdate(progressEntryId, input, { new: true, runValidators: true });
+    },
 
     removeUser: async (parent, { userId }) => {
       return User.findOneAndDelete({ _id: userId});
