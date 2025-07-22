@@ -5,6 +5,9 @@ firstName: String!
 lastName: String!
 email: String!
 password: String!
+gender: String
+genderOther: String
+genderDisplay: String
 role: String!
 cases: [Case!]!
 }
@@ -57,6 +60,9 @@ type Query {
     lastName: String
     email: String
     password: String
+    gender: String
+    genderOther: String
+    genderDisplay: String
     role: String
     }
     
@@ -89,6 +95,9 @@ addUser (
     lastName: String!,
     email: String!,
     password: String!,
+    gender: String
+    genderOther: String
+    genderDisplay: String
     role: String!
 ): User!
 

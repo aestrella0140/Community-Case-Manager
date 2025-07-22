@@ -23,6 +23,15 @@ const UserSchema = new Schema({
     required: true,
     trim: true,
   },
+  gender: {
+    type: String,
+    enum: ['Male', 'Female', 'Non-binary', 'Prefer not to say', 'Other']
+  },
+  genderOther: {
+    type: String,
+    trim: true,
+    default: '',
+  },
   role: {
     type: String,
     required: true,
