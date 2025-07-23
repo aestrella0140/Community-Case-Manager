@@ -26,7 +26,7 @@ const resolvers = {
   },
 
   Mutation: {
-    addUser: async (parent, { firstName, lastName, email, password, gender, genderOther, role }) => {
+    addUser: async (parent, { firstName, lastName, email, password, gender, genderOther, ethnicity, ethnicityOther, role }) => {
       const user = await User.create({
         firstName,
         lastName,
@@ -34,6 +34,8 @@ const resolvers = {
         password,
         gender,
         genderOther,
+        ethnicity,
+        ethnicityOther,
         role,
       });
       const token = signToken(user);
@@ -224,10 +226,14 @@ const resolvers = {
 
   User: {
     genderDisplay: (parent) => {
-      if (parent.gender === 'Other' && parent.genderOther) {
-        return parent.genderOther;
-      }
-      return parent.gender || 'Prefer Not to say';
+      return (parent.gender === "Other" && parent.genderOther)
+      ? parent.genderOther
+      : parent.gender || "Prefer not to say";
+    },
+    ethnicityDisplay: (parent) => {
+      return (parent.ethnicity === "Other" && parent.genderOther)
+      ? parent.genderOther
+      : parent.gender || "prefer not to say";
     },
   },
 };

@@ -8,6 +8,9 @@ password: String!
 gender: String
 genderOther: String
 genderDisplay: String
+ethnicity: String
+ethnicityOther: String
+ethnicityDisplay: String
 role: String!
 cases: [Case!]!
 }
@@ -63,6 +66,9 @@ type Query {
     gender: String
     genderOther: String
     genderDisplay: String
+    ethnicity: String
+    ethnicityOther: String
+    ethnicityDisplay: String
     role: String
     }
     
@@ -98,6 +104,9 @@ addUser (
     gender: String
     genderOther: String
     genderDisplay: String
+    ethnicity: String
+    ethnicityOther: String
+    ethnicityDisplay: String
     role: String!
 ): User!
 

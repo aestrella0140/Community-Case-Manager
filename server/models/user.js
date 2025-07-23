@@ -1,4 +1,4 @@
-const { Schema, model} = require("mongoose");
+const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
 
 const UserSchema = new Schema({
@@ -25,12 +25,36 @@ const UserSchema = new Schema({
   },
   gender: {
     type: String,
-    enum: ['Male', 'Female', 'Non-binary', 'Prefer not to say', 'Other']
+    enum: ["Male", "Female", "Non-binary", "Prefer not to say", "Other"],
   },
   genderOther: {
     type: String,
     trim: true,
-    default: '',
+    default: "",
+  },
+  ethnicity: {
+    type: String,
+    enum: [
+      "Hispanic or Latino",
+      "Black or African American",
+      "White",
+      "Asian",
+      "Native American or Alaska Native",
+      "Native Hawaiian or Other Pacific Islander",
+      "Middle Eastern or North African",
+      "South Asian",
+      "East Asian",
+      "Southeast Asian",
+      "Indigenous",
+      "Multiracial",
+      "Other",
+      "Prefer not to say",
+    ],
+  },
+  ethnicityOther: {
+    type: String,
+    default: "",
+    trim: true
   },
   role: {
     type: String,
@@ -40,9 +64,9 @@ const UserSchema = new Schema({
   cases: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Case'
+      ref: "Case",
     },
-  ]
+  ],
 });
 
 UserSchema.pre("save", async function (next) {
@@ -52,12 +76,12 @@ UserSchema.pre("save", async function (next) {
   }
 
   next();
-})
+});
 
 UserSchema.methods.isCorrectPassword = async function (password) {
-    return bcrypt.compare(password, this.password);
+  return bcrypt.compare(password, this.password);
 };
 
-const User = model('User', UserSchema);
+const User = model("User", UserSchema);
 
 module.exports = User;
