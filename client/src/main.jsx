@@ -10,7 +10,8 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-
+        index: true,
+        element: <div>welcome</div>
       }
     ]
   }

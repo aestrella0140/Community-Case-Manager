@@ -21,7 +21,7 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      authorization: token ? `bearer${token}` : '',
+      authorization: token ? `bearer ${token}` : '',
     },
   };
 });
@@ -35,7 +35,7 @@ function App() {
   
 
   return (
-    <ApolloProvider>
+    <ApolloProvider client={client}>
       <Outlet />
     </ApolloProvider>
   )
