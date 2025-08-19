@@ -231,9 +231,9 @@ const resolvers = {
       : parent.gender || "Prefer not to say";
     },
     ethnicityDisplay: (parent) => {
-      return (parent.ethnicity === "Other" && parent.genderOther)
-      ? parent.genderOther
-      : parent.gender || "prefer not to say";
+      return (parent.ethnicity === "Other" && parent.ethnicityOther)
+      ? parent.ethnicityOther
+      : parent.ethnicity || "prefer not to say";
     },
   },
 };

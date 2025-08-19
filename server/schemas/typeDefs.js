@@ -4,7 +4,6 @@ _id: ID!
 firstName: String!
 lastName: String!
 email: String!
-password: String!
 gender: String
 genderOther: String
 genderDisplay: String
@@ -108,7 +107,7 @@ addUser (
     ethnicityOther: String
     ethnicityDisplay: String
     role: String!
-): User!
+): Auth!
 
 login(email: String!, password: String!): Auth
 
@@ -151,7 +150,7 @@ deleteUserProgressEntry(user: ID!, progressEntry: ID!): Boolean!
 
 type Auth {
 token: ID!
-user: User
+user: User!
 }
 `;
 
