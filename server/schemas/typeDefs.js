@@ -1,5 +1,5 @@
 const typeDefs = `
-type User {
+input CreateUserInput {
 _id: ID!
 firstName: String!
 lastName: String!
@@ -14,38 +14,66 @@ role: String!
 cases: [Case!]!
 }
 
-type Case {
-_id: ID!
+input CreateCaseInput {
 firstName: String!
 lastName: String!
 dob: String!
 status: String!
-assignedTo: User!
-notes: [Note!]!
-createdAt: String!
-updatedAt: String!
+assignedTo: ID!
+notes: [ID]
 }
 
-type Note {
-_id: ID!
+input CreateNoteInput {
 content: String!
-author: User!
-case: Case!
-createdAt: String!
-updatedAt: String!
+author: ID!
+case: ID!
 }
 
-type ProgressEntry {
-_id: ID!
+input CreateProgressEntryInput {
 title: String!
 description: String!
 date: String!
-status: String!
-case: Case!
-createdBy: User!
-createdAt: String!
-updatedAt: String!
+status: String
+case: ID!
+createdBy: ID!
 }
+
+input UpdateUserInput {
+    firstName: String
+    lastName: String
+    email: String
+    password: String
+    gender: String
+    genderOther: String
+    genderDisplay: String
+    ethnicity: String
+    ethnicityOther: String
+    ethnicityDisplay: String
+    role: String
+    }
+    
+    input UpdateCaseInput {
+    firstName: String
+    lastName: String
+    dob: String
+    status: String
+    assignedTo: ID
+    }
+    
+    input UpdateNoteInput {
+    content: String
+    authorId: ID
+    caseId: ID
+    }
+    
+    input UpdateProgressEntryInput {
+    title: String
+    description: String
+    date: String
+    status: String
+    caseId: ID
+    createdBy: ID
+    }
 
 type Query {
     getAllCases: [Case!]!
@@ -95,43 +123,12 @@ type Query {
     }
     
 type Mutation {
-addUser (
-    firstName: String!,
-    lastName: String!,
-    email: String!,
-    password: String!,
-    gender: String
-    genderOther: String
-    genderDisplay: String
-    ethnicity: String
-    ethnicityOther: String
-    ethnicityDisplay: String
-    role: String!
-): Auth!
+
+addUser(input: CreateUserInput!): Auth!
+
+
 
 login(email: String!, password: String!): Auth
-
-addCase (
-firstName: String!,
-lastName: String!,
-dob: String!,
-assignedTo: ID!
-): Case!
-
-addNote (
-content: String!,
-authorId: ID!,
-caseId: ID!
-): Note!
-
-addProgressEntry (
-title: String!,
-description: String!,
-date: String!,
-status: String!,
-case: ID!,
-createdBy: ID!
-): ProgressEntry
 
 updateUser(userId: ID!, input: UpdateUserInput!): User
 updateCase(caseId: ID!, input: UpdateCaseInput!): Case
