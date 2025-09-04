@@ -1,24 +1,20 @@
 const typeDefs = `
 input CreateUserInput {
-_id: ID!
 firstName: String!
 lastName: String!
 email: String!
 gender: String
 genderOther: String
-genderDisplay: String
 ethnicity: String
 ethnicityOther: String
-ethnicityDisplay: String
 role: String!
-cases: [Case!]!
 }
 
 input CreateCaseInput {
 firstName: String!
 lastName: String!
 dob: String!
-status: String!
+status: String
 assignedTo: ID!
 notes: [ID]
 }
@@ -36,6 +32,57 @@ date: String!
 status: String
 case: ID!
 createdBy: ID!
+}
+
+type User {
+_id: ID!
+firstName: String!
+lastName: String!
+email: String!
+gender: String
+genderOther: String
+genderDisplay: String
+ethnicity: String
+ethnicityOther: String
+ethnicityDisplay: String
+role: String!
+cases: [Case!]!
+}
+
+type Case {
+  _id: ID!
+  firstName: String!
+  lastName: String!
+  dob: String!
+  status: String!
+  assignedTo: User!
+  notes: [Note]
+}
+
+type Note {
+  _id: ID!
+  content: String!
+  author: User!
+  case: Case!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type ProgressEntry {
+  _id: ID!
+  title: String!
+  description: String!
+  date: String!
+  status: String
+  case: Case!
+  createdBy: User!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Auth {
+token: ID!
+user: User!
 }
 
 input UpdateUserInput {
@@ -85,48 +132,12 @@ type Query {
     getProgressEntriesByCase(caseId: ID!): [ProgressEntry!]!
     }
     
-    input UpdateUserInput {
-    firstName: String
-    lastName: String
-    email: String
-    password: String
-    gender: String
-    genderOther: String
-    genderDisplay: String
-    ethnicity: String
-    ethnicityOther: String
-    ethnicityDisplay: String
-    role: String
-    }
-    
-    input UpdateCaseInput {
-    firstName: String
-    lastName: String
-    dob: String
-    status: String
-    assignedTo: ID
-    }
-    
-    input UpdateNoteInput {
-    content: String
-    authorId: ID
-    caseId: ID
-    }
-    
-    input UpdateProgressEntryInput {
-    title: String
-    description: String
-    date: String
-    status: String
-    caseId: ID
-    createdBy: ID
-    }
-    
 type Mutation {
 
 addUser(input: CreateUserInput!): Auth!
-
-
+addCase(input: CreateCaseInput!): Case
+addNote(input: CreateNoteInput!): Note
+addProgressEntry(input: CreateProgressEntryInput!): ProgressEntry
 
 login(email: String!, password: String!): Auth
 
@@ -144,11 +155,6 @@ deleteProgressEntry(id: ID!): Boolean!
 deleteUserProgressEntry(user: ID!, progressEntry: ID!): Boolean!
 }
 
-
-type Auth {
-token: ID!
-user: User!
-}
 `;
 
 module.exports = typeDefs;

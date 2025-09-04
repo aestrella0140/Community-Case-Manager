@@ -18,7 +18,6 @@ const caseSchema = new Schema(
     },
     status: {
       type: String,
-      required: true,
       enum: ["active", "pending", "closed"],
       default: "pending",
     },
