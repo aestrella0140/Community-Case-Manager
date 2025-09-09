@@ -4,96 +4,42 @@ const { signToken, AuthenticationError } = require("../utils/auth");
 
 const resolvers = {
   Query: {
-    Users: async () => {
+    getAllUsers: async () => {
       return User.find();
     },
 
-    user: async (parent, { userId }) => {
+    getUserById: async (parent, { userId }) => {
       return User.findOne({ _id: userId });
     },
 
-    Cases: async () => {
+    getAllCases: async () => {
       return Case.find();
     },
 
-    case: async (parent, { caseId }) => {
+    getCaseById: async (parent, { caseId }) => {
       return Case.findOne({ _id: caseId });
     },
 
-    notes: async (parent, { userId }) => {
+    getAllNotes: async (parent, { userId }) => {
       return Note.find({ author: userId });
+    },
+
+    getAllProgressEntries: async () => {
+      return ProgressEntry.find();
+    },
+
+    getProgressEntryById: async (parent, { progressEntryId }) => {
+      return ProgressEntry.findOne({ _id: progressEntryId });
     },
   },
 
   Mutation: {
-    addUser: async (parseConstValue, args) => {
-      const user = await User.create(args);
+    addUser: async (parent, { input }) => {
+      const user = await User.create(input);
       const token = signToken(user);
 
       return { token, user };
     },
-
-    // addUser: async (
-    //   parent,
-    //   {
-    //     firstName,
-    //     lastName,
-    //     email,
-    //     password,
-    //     gender,
-    //     genderOther,
-    //     ethnicity,
-    //     ethnicityOther,
-    //     role,
-    //   }
-    // ) => {
-    //   console.log("--add usedr start--");
-    //   console.log("Incoming args", {
-    //     firstName,
-    //     lastName,
-    //     email,
-    //     password,
-    //     gender,
-    //     genderOther,
-    //     ethnicity,
-    //     ethnicityOther,
-    //     role,
-    //   });
-
-    //   try {
-    //     const user = await User.create({
-    //       firstName,
-    //       lastName,
-    //       email,
-    //       password,
-    //       gender,
-    //       genderOther,
-    //       ethnicity,
-    //       ethnicityOther,
-    //       role,
-    //     });
-
-    //     if (!user) {
-    //       console.log("❌ User creation failed — Mongoose returned null!");
-    //       throw new Error("User creation failed");
-    //     }
-
-    //     console.log("User Created successfully:", user);
-
-    //     const token = signToken(user);
-    //     console.log("Token Created successfully:", token);
-
-    //     if (!token) {
-    //       console.error("❌ signToken returned null!");
-    //       throw new Error("Failed to generate token");
-    //     }
-
-    //     return { token, user };
-    //   } catch (err) {
-    //     console.error("ERROR in addUser resolver:", err);
-    //     throw new Error("Failed to create user");
-    //   }
-    // },
 
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
@@ -112,30 +58,17 @@ const resolvers = {
       return { token, user };
     },
 
-    addCase: async (
-      parent,
-      { firstName, lastName, dob, assignedTo, status }
-    ) => {
-      const newCase = await Case.create({
-        firstName,
-        lastName,
-        dob,
-        assignedTo,
-        status,
-      });
+    addCase: async (parent,{ input }) => {
+      const newCase = await Case.create(input);
 
-      awaitUser.findByIdAndUpdate(assignedTo, {
+      await User.findByIdAndUpdate(assignedTo, {
         $push: { cases: newCase._id },
       });
       return newCase;
     },
 
-    addNote: async (parent, { content, authorId, caseId }) => {
-      const note = await Note.create({
-        content,
-        author: authorId,
-        case: caseId,
-      });
+    addNote: async (parent, { input }) => {
+      const note = await Note.create(input);
 
       await Case.findByIdAndUpdate(caseId, {
         $push: { notes: note._id },
@@ -144,18 +77,9 @@ const resolvers = {
       return note;
     },
 
-    addProgressEntry: async (
-      parent,
-      { title, description, date, status, case: caseId, createdBy }
-    ) => {
-      const entry = await ProgressEntry.create({
-        title,
-        description,
-        date,
-        status,
-        case: caseId,
-        createdBy,
-      });
+    addProgressEntry: async (parent, { input }) => {
+      const entry = await ProgressEntry.create(input);
+      
       return entry;
     },
 
@@ -187,7 +111,7 @@ const resolvers = {
       });
     },
 
-    removeUser: async (parent, { userId }) => {
+    deleteUser: async (parent, { userId }) => {
       return User.findOneAndDelete({ _id: userId });
     },
 

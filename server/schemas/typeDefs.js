@@ -3,6 +3,7 @@ input CreateUserInput {
 firstName: String!
 lastName: String!
 email: String!
+password: String!
 gender: String
 genderOther: String
 ethnicity: String
@@ -123,12 +124,14 @@ input UpdateUserInput {
     }
 
 type Query {
-    getAllCases: [Case!]!
-    getCaseById(id: ID!): Case
     getAllUsers: [User!]!
     getUserById(id: ID!): User
-    getAllProgressEntryById(id: ID!): ProgressEntry
+    getAllCases: [Case!]!
+    getCaseById(id: ID!): Case
+    getAllNotes: [Note!]!
+    getNoteById(id: ID!):
     getAllProgressEntries: [ProgressEntry!]!
+    getProgressEntryById(id: ID!): ProgressEntry
     getProgressEntriesByCase(caseId: ID!): [ProgressEntry!]!
     }
     
