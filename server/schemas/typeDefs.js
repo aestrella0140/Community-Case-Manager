@@ -83,7 +83,7 @@ type ProgressEntry {
 
 type Auth {
 token: ID!
-user: User!
+user: User
 }
 
 input UpdateUserInput {
@@ -129,7 +129,7 @@ type Query {
     getAllCases: [Case!]!
     getCaseById(id: ID!): Case
     getAllNotes: [Note!]!
-    getNoteById(id: ID!):
+    getNoteById(id: ID!): Note
     getAllProgressEntries: [ProgressEntry!]!
     getProgressEntryById(id: ID!): ProgressEntry
     getProgressEntriesByCase(caseId: ID!): [ProgressEntry!]!
@@ -137,7 +137,7 @@ type Query {
     
 type Mutation {
 
-addUser(input: CreateUserInput!): Auth!
+addUser(input: CreateUserInput!): Auth
 addCase(input: CreateCaseInput!): Case
 addNote(input: CreateNoteInput!): Note
 addProgressEntry(input: CreateProgressEntryInput!): ProgressEntry

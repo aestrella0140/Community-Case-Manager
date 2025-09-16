@@ -35,23 +35,45 @@ const resolvers = {
 
   Mutation: {
     addUser: async (parent, { input }) => {
-      const user = await User.create(input);
-      const token = signToken(user);
+      try {
+        console.log("incoming data:", input);
+        const user = await User.create(input);
 
-      return { token, user };
+        if (!user) {
+          console.error("User creation failed.");
+        }
+
+        const token = signToken(user);
+
+        if (!token) {
+          console.error("signToken returned Null!");
+          throw new Error("failed to generate token");
+        }
+
+        console.log("✅ User created successfully:", user);
+        console.log("✅ Token generated successfully:", token);
+  
+        return { token, user };
+        
+
+      } catch (err) {
+        console.error("Error in addUser resolver:", err);
+      
+
+      }
     },
 
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 
       if (!user) {
-        throw AuthenticationError;
+        throw new AuthenticationError("No user with is email");
       }
 
       const correctPw = await user.isCorrectPassword(password);
 
       if (!correctPw) {
-        throw AuthenticationError;
+        throw new AuthenticationError("email or password is incorrect");
       }
 
       const token = signToken(user);
@@ -222,3 +244,5 @@ const resolvers = {
     },
   },
 };
+
+module.exports = resolvers;
