@@ -92,6 +92,8 @@ const resolvers = {
     },
 
     addNote: async (parent, { input }) => {
+      const { caseId } = input;
+
       const note = await Note.create(input);
 
       await Case.findByIdAndUpdate(caseId, {
