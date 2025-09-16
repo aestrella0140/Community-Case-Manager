@@ -81,6 +81,8 @@ const resolvers = {
     },
 
     addCase: async (parent,{ input }) => {
+      const { assignedTo } = input;
+
       const newCase = await Case.create(input);
 
       await User.findByIdAndUpdate(assignedTo, {
