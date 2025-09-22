@@ -147,7 +147,7 @@ login(email: String!, password: String!): Auth
 updateUser(userId: ID!, input: UpdateUserInput!): User
 updateCase(caseId: ID!, input: UpdateCaseInput!): Case
 updateNote(noteId: ID!, input: UpdateNoteInput!): Note
-updateProgressEntry(entryId: ID!, input: UpdateProgressEntryInput!): ProgressEntry
+updateProgressEntry(progressEntryId: ID!, input: UpdateProgressEntryInput!): ProgressEntry
 
 deleteUser(id: ID!): Boolean!
 deleteCase(id: ID!): Boolean!

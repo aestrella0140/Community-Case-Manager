@@ -15,6 +15,17 @@ export const ADD_USER = gql`
   }
 `;
 
+export const UPDATE_USER = gql`
+mutation ($userId: ID!, $input: UpdateUserInput!) {
+  updateUser(userId: $userId, input: $input) {
+    firstName
+    lastName
+    gender
+    ethnicity
+  }
+}
+`;
+
 export const ADD_CASE = gql`
   mutation ($input: CreateCaseInput!) {
     addCase(input: $input) {
@@ -34,6 +45,14 @@ export const ADD_CASE = gql`
   }
 `;
 
+export const UPDATE_CASE =  gql`
+mutation ($caseId: ID!, $input: UpdateCaseInput!) {
+  updateCase(caseId: $caseId, input: $input) {
+    status
+  }
+}
+`
+
 export const ADD_NOTE = gql`
 mutation ($input: CreateNoteInput!) {
   addNote(input: $input) {
@@ -45,6 +64,14 @@ mutation ($input: CreateNoteInput!) {
     case {
       _id
     }
+  }
+}
+`;
+
+export const UPDATE_NOTE = gql`
+mutation Mutation($noteId: ID!, $input: UpdateNoteInput!) {
+  updateNote(noteId: $noteId, input: $input) {
+    content
   }
 }
 `;
@@ -66,3 +93,14 @@ mutation ($input: CreateProgressEntryInput!) {
   }
 }
 `;
+
+export const UPDATE_PROGRESSENTRY = gql`
+mutation Mutation($progressEntryId: ID!, $input: UpdateProgressEntryInput!) {
+  updateProgressEntry(progressEntryId: $progressEntryId, input: $input) {
+    description
+    status
+    title
+  }
+}
+`;
+
