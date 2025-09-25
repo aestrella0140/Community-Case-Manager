@@ -52,14 +52,10 @@ const resolvers = {
 
         console.log("✅ User created successfully:", user);
         console.log("✅ Token generated successfully:", token);
-  
-        return { token, user };
-        
 
+        return { token, user };
       } catch (err) {
         console.error("Error in addUser resolver:", err);
-      
-
       }
     },
 
@@ -80,7 +76,7 @@ const resolvers = {
       return { token, user };
     },
 
-    addCase: async (parent,{ input }) => {
+    addCase: async (parent, { input }) => {
       const { assignedTo } = input;
 
       const newCase = await Case.create(input);
@@ -105,7 +101,7 @@ const resolvers = {
 
     addProgressEntry: async (parent, { input }) => {
       const entry = await ProgressEntry.create(input);
-      
+
       return entry;
     },
 
@@ -137,8 +133,41 @@ const resolvers = {
       });
     },
 
-    deleteUser: async (parent, { userId }) => {
-      return User.findOneAndDelete({ _id: userId });
+    deleteUser: async (parent, { userId }, context) => {
+      if (!context.user) {
+        throw new AuthenticationError("Not logged In");
+      }
+
+      if (context.user.role !== "admin" && context.user._id.toString() !== userId) {
+        throw new AuthenticationError("not authorized");
+      }
+
+      const session = await User.startSession();
+      session.startTransaction();
+
+      try {
+        const deletedUser = await User.findOneAndDelete({ _id: userId }, { session });
+  
+        if (!deletedUser) {
+          await session.abortTransaction();
+          session.endSession();
+          return null;
+        };
+  
+        await Case.deleteMany({ assignedTo: userId }, { session });
+        await Note.deleteMany({ author: userId }, { session });
+        await ProgressEntry.deleteMany({ user: userId }, { session });
+  
+        await session.commitTransaction();
+        session.endSession();
+
+        return deletedUser;
+
+      } catch (error) {
+        await session.abortTransaction();
+        session.endSession();
+        throw new Error("delete failed: ", + error.message);
+      }
     },
 
     deleteCase: async (parent, { id }) => {

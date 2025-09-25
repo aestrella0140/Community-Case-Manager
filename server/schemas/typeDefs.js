@@ -149,13 +149,13 @@ updateCase(caseId: ID!, input: UpdateCaseInput!): Case
 updateNote(noteId: ID!, input: UpdateNoteInput!): Note
 updateProgressEntry(progressEntryId: ID!, input: UpdateProgressEntryInput!): ProgressEntry
 
-deleteUser(id: ID!): Boolean!
-deleteCase(id: ID!): Boolean!
-deleteUserCase(userId: ID!, caseId: ID!): Boolean!
-deleteNote(id: ID!): Boolean!
-deleteUserNote(user: ID!, noteId: ID!): Boolean!
-deleteProgressEntry(id: ID!): Boolean!
-deleteUserProgressEntry(user: ID!, progressEntry: ID!): Boolean!
+deleteUser(id: ID!): User
+deleteCase(id: ID!): Case
+deleteUserCase(userId: ID!, caseId: ID!): Case
+deleteNote(id: ID!): Note
+deleteUserNote(user: ID!, noteId: ID!): Note
+deleteProgressEntry(id: ID!): ProgressEntry
+deleteUserProgressEntry(user: ID!, progressEntry: ID!): ProgressEntry
 }
 
 `;
