@@ -4,12 +4,17 @@ const { GraphQLError } = require("graphql");
 const secret = "highly secret";
 const expiration = "2hr";
 
+class AuthenticationError extends GraphQLError {
+  constructor(message = 'couldnt authenticate User') {
+    super(message, {
+      extensions: { code: 'UNAUTHENTICATED'},
+    });
+  }
+}
+
 module.exports = {
-  AuthenticationError: new GraphQLError("couldnt authenticate user.", {
-    extensions: {
-      code: "UNAUTHENTICATED",
-    },
-  }),
+  
+  AuthenticationError,
 
   authMiddleware: function ({ req }) {
     let token = req.body.token || req.headers.authorization || req.query.token;
