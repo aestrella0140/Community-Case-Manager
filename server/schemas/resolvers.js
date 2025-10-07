@@ -36,11 +36,11 @@ const resolvers = {
       return Case.findOne({ _id: caseId });
     },
 
-    getAllNotes: async (parent, { userId }) => {
+    getNotesByCase: async (parent, { userId }) => {
       return Note.find({ author: userId });
     },
 
-    getAllProgressEntries: async () => {
+    getProgressEntriesByUser: async () => {
       return ProgressEntry.find();
     },
 
