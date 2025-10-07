@@ -128,9 +128,10 @@ type Query {
     getUserById(id: ID!): User
     getAllCases: [Case!]!
     getCaseById(id: ID!): Case
-    getAllNotes: [Note!]!
+    getNotesByCase(caseId: ID!): [Note!]!
+    getNoteByUser(userId: ID!): [Note!]!
     getNoteById(id: ID!): Note
-    getAllProgressEntries: [ProgressEntry!]!
+    getProgressEntriesByUser(userId: ID!): [ProgressEntry!]!
     getProgressEntryById(id: ID!): ProgressEntry
     getProgressEntriesByCase(caseId: ID!): [ProgressEntry!]!
     }

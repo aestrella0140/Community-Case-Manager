@@ -4,12 +4,28 @@ const { signToken, AuthenticationError } = require("../utils/auth");
 
 const resolvers = {
   Query: {
-    getAllUsers: async () => {
+    getAllUsers: async (parent, args, context) => {
+      if (!context.user) {
+        throw new AuthenticationError("You must be logged in to view Users.");
+      }
+
+      if (context.user.role !== "admin") {
+        throw new AuthenticationError("You are not authorized to view all users.");
+      }
+
       return User.find();
     },
 
-    getUserById: async (parent, { userId }) => {
-      return User.findOne({ _id: userId });
+    getUserById: async (parent, { id }, context) => {
+      if (!context.user) {
+        throw new AuthenticationError("You must be logged in to view Users.");
+      }
+
+      if (context.user.role !== "admin" && context.user._id !== id) {
+        throw new AuthenticationError("Not authorized to view this user.")
+      }
+
+      return User.findById(id);
     },
 
     getAllCases: async () => {
