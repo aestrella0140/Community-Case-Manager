@@ -7,10 +7,30 @@ import { ADD_USER } from "../utils/mutations";
 
 import { Link } from "react-router-dom";
 
-const signup = () => {
+const genderOptions = ["Male", "Female", "Non-binary", "Prefer not to say", "Other"];
+const ethnicityOptions = [
+      "Hispanic or Latino",
+      "Black or African American",
+      "White",
+      "Asian",
+      "Native American or Alaska Native",
+      "Native Hawaiian or Other Pacific Islander",
+      "Middle Eastern or North African",
+      "South Asian",
+      "East Asian",
+      "Southeast Asian",
+      "Indigenous",
+      "Multiracial",
+      "Other",
+      "Prefer not to say",];
+
+const Signup = () => {
     const [addUser, { loading }] = useMutation(ADD_USER);
     const [ submitMessage, setSubmitMessage ] = React.useState(null);
     const [ showMessage, SetShowMessage ] = React.useState(false);
+
+    const [showGenderModal, setShowGenderModal] = React.useState(false);
+    const [showEthnicityModal, setShowEthnicityModal] = React.useState(false);
 
     const userValidationSchema = Yup.object().shape({
         firstName: Yup.string().required("firstName is required."),
@@ -75,20 +95,43 @@ const signup = () => {
                             </div>
 
                             <div>
-                                <label htmlFor="lastName">First Name:</label>
+                                <label htmlFor="lastName">Last Name:</label>
                                 <Field type="text" name="lastName" id="lastName" className=""/>
                                 <ErrorMessage name="lastName" component="div" className="" />
                             </div>
 
                             <div>
-                                <label htmlFor="email">First Name:</label>
+                                <label htmlFor="email">Email:</label>
                                 <Field type="text" name="email" id="email" className=""/>
                                 <ErrorMessage name="email" component="div" className="" />
                             </div>
 
                             <div>
-                                <label htmlFor="gender">First Name:</label>
-                                <Field type="text" name="gender" id="gender" className=""/>
+                                <label htmlFor="gender">Password:</label>
+                                <Field type="text" name="password" id="pwd" className=""/>
+                                <ErrorMessage name="password" component="div" className="" />
+                            </div>
+
+                            <div>
+                                <label htmlFor="gender">Gender:</label>
+                                <Field 
+                                as="select"
+                                name="gender"
+                                id="gender"
+                                onChange={(e) => {
+                                    const selected = e.target.value;
+                                    if (selected === "Other") {
+                                        setShowGenderModal(true);
+                                    }
+                                }}
+                                >
+                                    <option value="">Select Gender</option>
+                                    {genderOptions.map((option) => (
+                                        <option key={option} value={option}>
+                                            {option}
+                                        </option>
+                                    ))}
+                                </Field>
                                 <ErrorMessage name="gender" component="div" className="" />
                             </div>
 
@@ -99,8 +142,25 @@ const signup = () => {
                             </div>
 
                             <div>
-                                <label htmlFor="ethnicity">First Name:</label>
-                                <Field type="text" name="ethnicity" id="ethnicity" className=""/>
+                                <label htmlFor="ethnicity">Ethnicity:</label>
+                                <Field
+                                as="select"
+                                name="ethnicity"
+                                id="ethnicity"
+                                onChange={(e) => {
+                                    const selected = e.target.value;
+                                    if (selected === "Other") {
+                                        setShowEthnicityModal(true);
+                                    }
+                                }}
+                                >
+                                    <option value="">Select Ethnicity</option>
+                                    {ethnicityOptions.map((option) => (
+                                        <option key={option} value={option}>
+                                            {option}
+                                        </option>
+                                    ))}
+                                </Field>
                                 <ErrorMessage name="ethnicity" component="div" className="" />
                             </div>
 
@@ -111,7 +171,7 @@ const signup = () => {
                             </div>
 
                             <div>
-                                <label htmlFor="role">First Name:</label>
+                                <label htmlFor="role">Role:</label>
                                 <Field type="text" name="role" id="role" className=""/>
                                 <ErrorMessage name="role" component="div" className="" />
                             </div>
@@ -127,4 +187,4 @@ const signup = () => {
     );
 };
 
-export default signup;
+export default Signup;
