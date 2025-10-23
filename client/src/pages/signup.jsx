@@ -4,6 +4,7 @@ import * as Yup from "yup";
 
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../utils/mutations";
+import auth from "../utils/auth";
 
 import { Link } from "react-router-dom";
 
@@ -99,9 +100,9 @@ const Signup = () => {
               }
               setSubmitMessage("User created Successfully.");
               SetShowMessage(true);
-              resetForm();
+              auth.login(data.addUser.token)
             })
-            .catch(() => {
+            .catch((error) => {
               console.error("Mutation Error:", error);
               setSubmitMessage("Something went wrong. Please try again.");
               SetShowMessage(true);
@@ -144,7 +145,7 @@ const Signup = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="gender">Password:</label>
+                  <label htmlFor="password">Password:</label>
                   <Field type="text" name="password" id="pwd" className="" />
                   <ErrorMessage name="password" component="div" className="" />
                 </div>
@@ -172,20 +173,7 @@ const Signup = () => {
                   <ErrorMessage name="gender" component="div" className="" />
                 </div>
 
-                <div>
-                  <label htmlFor="genderOther">First Name:</label>
-                  <Field
-                    type="text"
-                    name="genderOther"
-                    id="genderOther"
-                    className=""
-                  />
-                  <ErrorMessage
-                    name="genderOther"
-                    component="div"
-                    className=""
-                  />
-                </div>
+                
 
                 <div>
                   <label htmlFor="ethnicity">Ethnicity:</label>
@@ -211,21 +199,6 @@ const Signup = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="ethnicityOther">First Name:</label>
-                  <Field
-                    type="text"
-                    name="ethnicityOther"
-                    id="ethnicityOther"
-                    className=""
-                  />
-                  <ErrorMessage
-                    name="ethnicityOther"
-                    component="div"
-                    className=""
-                  />
-                </div>
-
-                <div>
                   <label htmlFor="role">Role:</label>
                   <Field type="text" name="role" id="role" className="" />
                   <ErrorMessage name="role" component="div" className="" />
@@ -236,7 +209,7 @@ const Signup = () => {
                 </button>
               </Form>
 
-              {values.gender === "Other" && (
+              {showGenderModal && (
                 <Modal
                   title="Enter Gender"
                   onClose={() => setShowGenderModal(false)}
@@ -250,7 +223,7 @@ const Signup = () => {
                 </Modal>
               )}
 
-              {values.ethnicity === "Other" && (
+              {showEthnicityModal && (
                 <Modal
                   title="Enter Ethnicity"
                   onClose={() => setShowEthnicityModal(false)}
