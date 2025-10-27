@@ -74,6 +74,7 @@ const Signup = () => {
           firstName: "",
           lastName: "",
           email: "",
+          password: "",
           gender: "",
           genderOther: "",
           ethnicity: "",
@@ -84,14 +85,17 @@ const Signup = () => {
         onSubmit={(values, { setSubmitting }) => {
           addUser({
             variables: {
-              firstName: values.firstName,
-              lastName: values.lastName,
-              email: values.email,
-              gender: values.gender,
-              genderOther: values.genderOther,
-              ethnicity: values.ethnicity,
-              ethnicityOther: values.ethnicityOther,
-              role: values.role,
+              input: {
+                firstName: values.firstName,
+                lastName: values.lastName,
+                email: values.email,
+                password: values.password,
+                gender: values.gender,
+                genderOther: values.genderOther,
+                ethnicity: values.ethnicity,
+                ethnicityOther: values.ethnicityOther,
+                role: values.role,
+              }
             },
           })
             .then(({ data, errors }) => {
@@ -112,7 +116,7 @@ const Signup = () => {
             });
         }}
       >
-        {({ values, isSubmitting }) => {
+        {({ values, handleChange, isSubmitting }) => {
           return (
             <>
               <Form>
@@ -150,6 +154,7 @@ const Signup = () => {
                   <ErrorMessage name="password" component="div" className="" />
                 </div>
 
+              
                 <div>
                   <label htmlFor="gender">Gender:</label>
                   <Field
@@ -157,8 +162,8 @@ const Signup = () => {
                     name="gender"
                     id="gender"
                     onChange={(e) => {
-                      const selected = e.target.value;
-                      if (selected === "Other") {
+                      handleChange(e);
+                      if (e.target.value === "Other") {
                         setShowGenderModal(true);
                       }
                     }}
@@ -182,8 +187,8 @@ const Signup = () => {
                     name="ethnicity"
                     id="ethnicity"
                     onChange={(e) => {
-                      const selected = e.target.value;
-                      if (selected === "Other") {
+                      handleChange(e);
+                      if (e.target.value === "Other") {
                         setShowEthnicityModal(true);
                       }
                     }}
