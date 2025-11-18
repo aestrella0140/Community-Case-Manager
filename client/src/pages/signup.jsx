@@ -120,59 +120,65 @@ const Signup = () => {
           return (
             <>
               <div className="flex justify-center items-center min-h-screen bg-gray-100">
-                <Form className="flex flex-col items-start">
-                  <div className="flex flex-col w-full max-w-sm mb-4">
-                    <label htmlFor="firstName" className="text-sm font-medium text-gray-700 mb-1">First Name:</label>
+                <Form className="flex flex-col items-start p-6 bg-white rounded-lg shadow max-w-xl">
+                <h2 className="text-2xl font-semibold mb-4">Signup</h2>
+
+                <div className="flex flex-row ">
+                  <div className="flex flex-col flex-1">
+                    <label
+                      htmlFor="firstName"
+                      className="text-sm font-medium text-gray-700 mb-1"
+                    >
+                      First Name:
+                    </label>
                     <Field
                       type="text"
                       name="firstName"
                       id="firstName"
-                      className="border border-gray-300 rounded px-2 py-1 w-full"
+                      className="border border-gray-300 rounded"
                     />
                     <ErrorMessage
                       name="firstName"
                       component="div"
-                      className="border border-gray-300 rounded px-2 py-1 w-full"
+                      className="border border-gray-300 rounded"
                     />
                   </div>
 
-                  <div className="flex flex-col w-full max-w-sm mb-4">
-                    <label htmlFor="lastName" >Last Name:</label>
+                  <div className="flex flex-col flex-1">
+                    <label htmlFor="lastName">Last Name:</label>
                     <Field
                       type="text"
                       name="lastName"
                       id="lastName"
-                      className="border border-gray-300 rounded px-2 py-1 w-full"
+                      className="border border-gray-300 rounded  w-full"
                     />
                     <ErrorMessage
                       name="lastName"
                       component="div"
-                      className="border border-gray-300 rounded px-2 py-1 w-full"
+                      className="border border-gray-300 rounded "
                     />
                   </div>
+                </div>
 
                   <div className="flex flex-col w-full max-w-sm mb-4">
                     <label htmlFor="email">Email:</label>
-                    <Field 
-                    type="text" 
-                    name="email" 
-                    id="email" 
-                    className="border border-gray-300 rounded px-2 py-1 w-full" 
+                    <Field
+                      type="text"
+                      name="email"
+                      id="email"
+                      className="border border-gray-300 rounded px-2 py-1 w-full"
                     />
-                    <ErrorMessage 
-                    name="email" 
-                    component="div" 
-                    className="" 
-                    />
+                    <ErrorMessage name="email" component="div" className="" />
                   </div>
 
                   <div className="flex flex-col w-full max-w-sm mb-4">
                     <label htmlFor="password">Password:</label>
-                    <Field 
-                    type="text"
-                    name="password" 
-                    id="pwd" 
-                    className="border border-gray-300 rounded px-2 py-1 w-full" />
+                    <Field
+                      type="text"
+                      name="password"
+                      id="pwd"
+                      className="border border-gray-300 rounded px-2 py-1 w-full"
+                    />
                     <ErrorMessage
                       name="password"
                       component="div"
@@ -234,11 +240,11 @@ const Signup = () => {
 
                   <div className="flex flex-col w-full max-w-sm mb-4">
                     <label htmlFor="role">Role:</label>
-                    <Field 
-                    type="text" 
-                    name="role" 
-                    id="role" 
-                    className="border border-gray-300 rounded px-2 py-1 w-full" 
+                    <Field
+                      type="text"
+                      name="role"
+                      id="role"
+                      className="border border-gray-300 rounded px-2 py-1 w-full"
                     />
                     <ErrorMessage name="role" component="div" className="" />
                   </div>
