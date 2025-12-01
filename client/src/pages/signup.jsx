@@ -120,11 +120,11 @@ const Signup = () => {
           return (
             <>
               <div className="flex justify-center items-center min-h-screen bg-gray-100">
-                <Form className="flex flex-col items-start p-6 bg-white rounded-lg shadow max-w-xl">
+                <Form className="flex flex-col items-start w-5/12 gap-4">
                 <h2 className="text-2xl font-semibold mb-4">Signup</h2>
 
-                <div className="flex flex-row ">
-                  <div className="flex flex-col flex-1">
+                <div className="grid grid-cols-2 gap-4 w-full">
+                  <div className="flex flex-col px-1">
                     <label
                       htmlFor="firstName"
                       className="text-sm font-medium text-gray-700 mb-1"
@@ -135,32 +135,33 @@ const Signup = () => {
                       type="text"
                       name="firstName"
                       id="firstName"
-                      className="border border-gray-300 rounded"
+                      className="border border-gray-300 rounded px-2 py-2 w-[97%]"
                     />
                     <ErrorMessage
                       name="firstName"
                       component="div"
-                      className="border border-gray-300 rounded"
+                      className="text-red-500 text-sm"
                     />
                   </div>
 
-                  <div className="flex flex-col flex-1">
+
+                  <div className="flex flex-col px-1">
                     <label htmlFor="lastName">Last Name:</label>
                     <Field
                       type="text"
                       name="lastName"
                       id="lastName"
-                      className="border border-gray-300 rounded  w-full"
+                      className="border border-gray-300 rounded px-2 py-2 w-[97%]"
                     />
                     <ErrorMessage
                       name="lastName"
                       component="div"
-                      className="border border-gray-300 rounded "
+                      className="text-red-500 text-sm"
                     />
                   </div>
                 </div>
 
-                  <div className="flex flex-col w-full max-w-sm mb-4">
+                  <div className="flex flex-col flex-1 w-full ">
                     <label htmlFor="email">Email:</label>
                     <Field
                       type="text"
@@ -171,7 +172,7 @@ const Signup = () => {
                     <ErrorMessage name="email" component="div" className="" />
                   </div>
 
-                  <div className="flex flex-col w-full max-w-sm mb-4">
+                  <div className="flex flex-col flex-1 w-full">
                     <label htmlFor="password">Password:</label>
                     <Field
                       type="text"
@@ -186,7 +187,7 @@ const Signup = () => {
                     />
                   </div>
 
-                  <div className="flex flex-col w-full max-w-sm mb-4">
+                  <div className="flex flex-col flex-1 w-full ">
                     <label htmlFor="gender">Gender:</label>
                     <Field
                       as="select"
@@ -210,7 +211,7 @@ const Signup = () => {
                     <ErrorMessage name="gender" component="div" className="" />
                   </div>
 
-                  <div className="flex flex-col w-full max-w-sm mb-4">
+                  <div className="flex flex-col flex-1 w-full">
                     <label htmlFor="ethnicity">Ethnicity:</label>
                     <Field
                       as="select"
@@ -238,7 +239,7 @@ const Signup = () => {
                     />
                   </div>
 
-                  <div className="flex flex-col w-full max-w-sm mb-4">
+                  <div className="flex flex-col flex-1 w-full">
                     <label htmlFor="role">Role:</label>
                     <Field
                       type="text"
