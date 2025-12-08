@@ -120,7 +120,7 @@ const Signup = () => {
           return (
             <>
               <div className="flex justify-center items-center min-h-screen bg-gray-100">
-                <Form className="flex flex-col items-start w-5/12 gap-4">
+                <Form className="flex flex-col items-start w-4/12 gap-4">
                 <h2 className="text-2xl font-semibold mb-4">Signup</h2>
 
                 <div className="grid grid-cols-2 gap-4 w-full">
@@ -167,7 +167,7 @@ const Signup = () => {
                       type="text"
                       name="email"
                       id="email"
-                      className="border border-gray-300 rounded px-2 py-1 w-full"
+                      className="border border-gray-300 rounded px-2 py-1 w-[98.5%]"
                     />
                     <ErrorMessage name="email" component="div" className="" />
                   </div>
@@ -178,7 +178,7 @@ const Signup = () => {
                       type="text"
                       name="password"
                       id="pwd"
-                      className="border border-gray-300 rounded px-2 py-1 w-full"
+                      className="border border-gray-300 rounded px-2 py-1 w-[98.5%]"
                     />
                     <ErrorMessage
                       name="password"
@@ -193,7 +193,7 @@ const Signup = () => {
                       as="select"
                       name="gender"
                       id="gender"
-                      className="border border-gray-300 rounded px-2 py-1 w-full"
+                      className="border border-gray-300 rounded px-2 py-1 w-[99.1%]"
                       onChange={(e) => {
                         handleChange(e);
                         if (e.target.value === "Other") {
@@ -217,7 +217,7 @@ const Signup = () => {
                       as="select"
                       name="ethnicity"
                       id="ethnicity"
-                      className="border border-gray-300 rounded px-2 py-1 w-full"
+                      className="border border-gray-300 rounded px-2 py-1 w-[99.1%]"
                       onChange={(e) => {
                         handleChange(e);
                         if (e.target.value === "Other") {
@@ -245,7 +245,7 @@ const Signup = () => {
                       type="text"
                       name="role"
                       id="role"
-                      className="border border-gray-300 rounded px-2 py-1 w-full"
+                      className="border border-gray-300 rounded px-2 py-1 w-[98.5%]"
                     />
                     <ErrorMessage name="role" component="div" className="" />
                   </div>
