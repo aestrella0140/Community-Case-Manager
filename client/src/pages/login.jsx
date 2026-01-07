@@ -16,7 +16,7 @@ const Login = () => {
       email: "",
       password: "",
     },
-    onSubmit: async (values, { setSubmmitting, setErrors }) => {
+    onSubmit: async (values, { setSubmitting, setErrors }) => {
       try {
         const { data } = await loginUser({ variables: values });
         if (!data || !data.login) {
@@ -29,34 +29,48 @@ const Login = () => {
         console.log("Stack trace:", err.stack);
         setErrors({ submit: "could not login in user" });
       } finally {
-        setSubmmitting(false);
+        setSubmitting(false);
       }
     },
   });
 
   return (
-    <div>
-      <form onSubmit={formik.handleSubmit}>
-        <label htmlFor="email">Email</label>
-        <input 
-        type="email"
-        name="email"
-        id="email"
-        onChange={formik.handleChange}
-        value={formik.values.email}
-        />
+    <div className="login flex justify-center">
+      <div className="">
+        <h2 className="text-2xl font-semibold">Login</h2>
+        <form
+          className="flex flex-col items-start"
+          onSubmit={formik.handleSubmit}
+        >
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            onChange={formik.handleChange}
+            value={formik.values.email}
+          />
 
-        <label htmlFor="password">Password</label>
-        <input 
-        type="password"
-        name="password"
-        id="pwd"
-        onChange={formik.handleChange}
-        value={formik.values.password}
-        />
-        <button type="submit" disabled={formik.isSubmitting}>Login</button>
-        {formik.errors.submit && <div>{formik.errors.submit}</div>}
-      </form>
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            name="password"
+            id="pwd"
+            onChange={formik.handleChange}
+            value={formik.values.password}
+          />
+          <div>
+            <button
+              type="submit"
+              disabled={formik.isSubmitting}
+              className="btn"
+            >
+              LOGIN 
+            </button>
+          </div>
+          {formik.errors.submit && <div>{formik.errors.submit}</div>}
+        </form>
+      </div>
     </div>
   );
 };
