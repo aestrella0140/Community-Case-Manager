@@ -35,7 +35,7 @@ const Login = () => {
   });
 
   return (
-    <div className="login flex justify-center">
+    <div className="login flex justify-center ">
       <div className="">
         <h2 className="text-2xl font-semibold">Login</h2>
         <form
