@@ -41,5 +41,43 @@ export const GET_USER_BY_ID = gql`
 `;
 
 export const GET_ALL_CASES = gql`
-
+  query GetAllCases {
+    getAllCases {
+      _id
+      firstName
+      lastName
+      status
+      dob
+      assignedTo {
+        _id
+        firstName
+        lastName
+      }
+      notes {
+        _id
+        content
+        createdAt
+        updatedAt
+      }
+    }
+  }
 `;
+
+export const GET_CASE_BY_ID = gql`
+query GetCaseById($getCaseByIdId: ID!) {
+  getCaseById(id: $getCaseByIdId) {
+    _id
+    firstName
+    lastName
+    status
+    dob
+    notes {
+      _id
+      content
+      createdAt
+      updatedAt
+    }
+  }
+}
+`;
+
