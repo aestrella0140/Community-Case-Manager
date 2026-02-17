@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const { GraphQLError } = require("graphql");
 
 const secret = "highly secret";
-const expiration = "2hr";
+const expiration = "2h";
 
 class AuthenticationError extends GraphQLError {
   constructor(message = 'couldnt authenticate User') {
@@ -17,9 +17,9 @@ module.exports = {
   AuthenticationError,
 
   authMiddleware: function ({ req }) {
-    let token = req.body.token || req.headers.authorization || req.query.token;
+    let token = req.headers.authorization;
 
-    if (req.headers.authorization) {
+    if (token) {
       token = token.split(" ").pop().trim();
     }
 

@@ -21,7 +21,7 @@ const resolvers = {
         throw new AuthenticationError("You must be logged in to view Users.");
       }
 
-      if (context.user.role !== "admin" && context.user._id !== id) {
+      if (context.user.role !== "admin" && context.user._id.toString() !== id.toString()) {
         throw new AuthenticationError("Not authorized to view this user.")
       }
 
