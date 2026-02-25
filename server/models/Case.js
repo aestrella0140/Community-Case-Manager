@@ -30,7 +30,6 @@ const caseSchema = new Schema(
       {
         type: Schema.Types.ObjectId,
         ref: "Note",
-        required: true,
       },
     ],
   },

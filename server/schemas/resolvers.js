@@ -92,12 +92,17 @@ const resolvers = {
       return { token, user };
     },
 
-    addCase: async (parent, { input }) => {
-      const { assignedTo } = input;
+    addCase: async (parent, { input }, context) => {
+      if (!context.user) {
+        throw new Error("Not authenticated.");
+      }
 
-      const newCase = await Case.create(input);
+      const newCase = await Case.create({
+        ...input,
+        assignedTo: context.user._id,
+      });
 
-      await User.findByIdAndUpdate(assignedTo, {
+      await User.findByIdAndUpdate(context.user._id, {
         $push: { cases: newCase._id },
       });
       return newCase;
