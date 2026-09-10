@@ -2,15 +2,16 @@ import React, { useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import auth from "../utils/auth";
 import { useNavigate } from "react-router-dom";
-import dayjs from 'dayjs';
+import dayjs from "dayjs";
 
 import { GET_USER_BY_ID, GET_CASE_BY_ID } from "../utils/queries";
 
 const Dashboard = () => {
-    const [currentDate, setCurrentDate] = useState(dayjs());
-    
-    const formattedDate = currentDate.format('DD MMMM YYYY');
+  const [currentDate, setCurrentDate] = useState(dayjs());
 
+  const formattedDate = currentDate.format("DD MMMM YYYY");
+
+  
   const user = auth.getUser();
   const userId = user?.data?._id;
 
@@ -23,8 +24,10 @@ const Dashboard = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("id_token");
-    navigate("/login");
+    navigate("/Login");
   };
+
+  
 
   if (loading) return <p>loading</p>;
 
@@ -37,17 +40,21 @@ const Dashboard = () => {
 
   return (
     <>
-      <header>
-        <h1>Welcome back, {firstName} {lastName} {formattedDate}</h1>
-        <button onClick={handleLogout}>logout</button>
+      <header className="dashboard-header">
+        <h2>Dashboard overview</h2>
+        <h1>
+          Welcome back, {firstName} {lastName} {formattedDate}
+        </h1>
+        <button className="m-auto" onClick={handleLogout}>logout</button>
       </header>
+      
+      
 
       <main>
-        <section>
-            <h2>Dashboard overview</h2>
+        <div>
+          <h3>My current cases</h3>
 
-            
-        </section>
+        </div>
       </main>
     </>
   );

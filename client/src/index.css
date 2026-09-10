@@ -23,3 +23,16 @@
   font-size: 16px;
   border-radius: 0.25rem;
 }
+
+/*Dashboard*/
+
+.dashboard-header {
+  display: flex;
+  max-width: 100%;
+}
+
+
+
+.dashboard-header h1 {
+  margin-left: 45%;
+}
