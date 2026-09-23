@@ -1,5 +1,5 @@
 {
-  "name": "community-case-manager",
+  "name": "Criminal-Case-Management-System",
   "version": "1.0.0",
   "description": "Track individuals in a community justice or social support program with case files, progress tracking, and notes — similar to PROMISE.",
   "main": "index.js",

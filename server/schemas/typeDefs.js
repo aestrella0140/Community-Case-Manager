@@ -12,11 +12,14 @@ role: String!
 }
 
 input CreateCaseInput {
-firstName: String!
-lastName: String!
-dob: String!
-status: String
+caseNumber: String!
+title: String!
+description: String!
+offense: String!
+location: String!
+status: String!
 assignedTo: ID!
+dateOpened: String!
 notes: [ID]
 }
 
@@ -52,12 +55,17 @@ cases: [Case!]!
 
 type Case {
   _id: ID!
-  firstName: String!
-  lastName: String!
-  dob: String!
+  caseNumber: String!
+  title: String!
+  description: String!
+  offense: String!
+  location: String!
   status: String!
+  priority: String!
+  dateOpened: String!
   assignedTo: User!
   notes: [Note]
+  progressEntries: [ProgressEntry]
 }
 
 type Note {

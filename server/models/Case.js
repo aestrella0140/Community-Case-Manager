@@ -2,24 +2,42 @@ const { Schema, model } = require("mongoose");
 
 const caseSchema = new Schema(
   {
-    firstName: {
+    caseNumber: {
       type: String,
       required: true,
       trim: true,
     },
-    lastName: {
+    title: {
       type: String,
       required: true,
       trim: true,
     },
-    dob: {
-      type: Date,
+    description: {
+      type: String,
+      required: true,
+    },
+    offense: {
+      type: String,
+      required: true,
+    },
+    location: {
+      type: String,
       required: true,
     },
     status: {
       type: String,
       enum: ["active", "pending", "closed"],
       default: "pending",
+    },
+    priority: {
+      type: String,
+      enum: ["low","medium", "high"],
+      default: "undefined",
+    },
+    dateOpened:
+    {
+      type: Date,
+      required: true,
     },
     assignedTo: {
       type: Schema.Types.ObjectId,
@@ -31,6 +49,12 @@ const caseSchema = new Schema(
         type: Schema.Types.ObjectId,
         ref: "Note",
       },
+    ],
+    progressEntries: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "ProgressEntry",
+      }
     ],
   },
   { timestamps: true }
