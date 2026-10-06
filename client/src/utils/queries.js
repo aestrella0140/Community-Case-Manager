@@ -32,8 +32,6 @@ export const GET_USER_BY_ID = gql`
       ethnicityOther
       cases {
         _id
-        firstName
-        lastName
         status
       }
     }

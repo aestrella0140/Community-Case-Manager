@@ -4,7 +4,9 @@
   "description": "Track individuals in a community justice or social support program with case files, progress tracking, and notes — similar to PROMISE.",
   "main": "index.js",
   "dependencies": {
-    "mongodb": "6.17.0"
+    "@tailwindcss/vite": "^4.3.3",
+    "mongodb": "6.17.0",
+    "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
     "concurrently": "9.1.2"

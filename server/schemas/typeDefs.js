@@ -18,6 +18,7 @@ description: String!
 offense: String!
 location: String!
 status: String!
+priority: String!
 assignedTo: ID!
 dateOpened: String!
 notes: [ID]
@@ -109,10 +110,13 @@ input UpdateUserInput {
     }
     
     input UpdateCaseInput {
-    firstName: String
-    lastName: String
-    dob: String
+    caseNumber: String
+    title: String
+    description: String
+    offense: String
+    location: String
     status: String
+    Priority: String
     assignedTo: ID
     }
     
@@ -129,6 +133,7 @@ input UpdateUserInput {
     status: String
     caseId: ID
     createdBy: ID
+    Notes: ID
     }
 
 type Query {

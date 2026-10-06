@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import auth from "../utils/auth";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 
 import { GET_USER_BY_ID, GET_CASE_BY_ID } from "../utils/queries";
@@ -47,6 +48,20 @@ const Dashboard = () => {
         </h1>
         <button className="m-auto" onClick={handleLogout}>logout</button>
       </header>
+
+      <nav className="flex flex-col bg-primary">
+        <ul className="">
+          <li>
+            <Link to="Profile">Profile</Link>
+          </li>
+          <li>
+            <Link to="HomePage">HomePage</Link>
+          </li>
+          <li>
+            <Link to="RelationalAnalytics">Analytics</Link>
+          </li>
+        </ul>
+      </nav>
       
       
 

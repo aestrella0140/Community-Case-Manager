@@ -8,6 +8,8 @@ import HomePage from "./pages/homePage.jsx";
 import Signup from "./pages/signup.jsx";
 import Login from "./pages/login.jsx";
 import Dashboard from "./pages/dashboard.jsx";
+import RelationalAnalytics from "./pages/RelationalAnalytics.jsx";
+import Profile from "./pages/profile.jsx";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +31,14 @@ const router = createBrowserRouter([
       {
         path: "Signup",
         element: <Signup />
+      },
+      {
+        path: "RelationalAnalytics",
+        element: <RelationalAnalytics />
+      },
+      {
+        path: "profile",
+        element: <Profile />
       }
     ]
   }
